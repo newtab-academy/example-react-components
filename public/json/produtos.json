@@ -1,0 +1,20 @@
+[
+    {
+        "codigo": 2,
+        "nome": "Mexirica",
+        "cor": "orange",
+        "preco": 10
+    },
+    {
+        "codigo": 6,
+        "nome": "Banana",
+        "cor": "yellow",
+        "preco": 3.59
+    },
+    {
+        "codigo": 53,
+        "nome": "Uva",
+        "cor": "purple",
+        "preco": 5.43
+    }
+]
