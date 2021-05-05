@@ -1,7 +1,31 @@
 import { useEffect, useState } from "react"
 import "./List.css"
+import { connect } from 'react-redux'
+import { increment, decrement, reset } from '../actions'
 
-function List() {
+const mapStateToProps = (state) => {
+    return {
+       counter: state
+    };
+ };
+ const mapDispatchToProps = (dispatch) => {
+    return {
+       increment: () => dispatch(increment()),
+       decrement: () => dispatch(decrement()),
+       reset: () => dispatch(reset())
+    };
+ };
+
+function List(props) {
+    console.log(props)
+    const cartoes = [
+        {
+            number:'0010123123'
+        },
+        {
+            number:'0010asda123123'
+        }
+    ]
 
     const [produtos, setProdutos] = useState([])
     const [showModal, setShowModal] = useState("none")
@@ -51,6 +75,16 @@ function List() {
     }
 
     return <div>
+        <div>{props.counter}</div>
+        <div>
+            <button onClick={props.increment}>++</button>
+        </div>
+        <div>
+            <button onClick={props.decrement}>--</button>
+        </div>
+        <div>
+            <button onClick={props.reset}>Reset</button>
+        </div>
         <h1>Listagem de produtos</h1>
         <table className="cotornado">
             <tr>
@@ -89,7 +123,14 @@ function List() {
             {
                 selectedProduct.nome
             }
-
+            <select>
+                <option value=""> Selecione um cartão </option>
+                {cartoes.map((cartao, i) => {
+                    return <option value={cartao.number} key={'opcaoCartao' + i}>
+                        {cartao.number}
+                    </option>
+                })}
+            </select>
             <input type="text" onChange={(e) => { setSearchParam(e.target.value); }} value={searchParam}/>
             <button onClick={() => { handleGoogleSearch() }}>Buscar no google</button>
             <button onClick={() => { setShowModal("none") }}>X</button>
@@ -97,4 +138,4 @@ function List() {
     </div>
 }
 
-export default List;
+export default connect(mapStateToProps, mapDispatchToProps)(List);
